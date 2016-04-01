@@ -23,10 +23,18 @@ class WooCommerce_Cart_Count_Shortcode_Test extends WP_UnitTestCase {
     	$this->assertEquals( $expected, $shortcode_tags["cart_button"]);
     }
 
-    public function test_put_cart_icon_should_render_icon_html_correctly() {
-    	$expected = '<i class="fa fa-shopping-cart"></i>';
+    public function test_put_cart_icon_should_render_cart_icon_html_correctly() {
+        $expected = '<i class="fa fa-shopping-cart"></i>';
 
-    	$actual = do_shortcode( '[cart_button icon="cart"]' );
+        $actual = do_shortcode( '[cart_button icon="cart"]' );
+        
+        $this->assertContains( $expected, $actual );
+    }
+
+    public function test_put_basket_icon_should_render_basket_icon_html_correctly() {
+    	$expected = '<i class="fa fa-shopping-basket"></i>';
+
+    	$actual = do_shortcode( '[cart_button icon="basket"]' );
     	
     	$this->assertContains( $expected, $actual );
     }
