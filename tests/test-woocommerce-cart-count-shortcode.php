@@ -38,4 +38,12 @@ class WooCommerce_Cart_Count_Shortcode_Test extends WP_UnitTestCase {
     	
     	$this->assertContains( $expected, $actual );
     }
+
+    public function test_if_no_put_icon_should_not_render_icon_html() {
+        $expected = '<i class="fa fa-"></i>';
+
+        $actual = do_shortcode( '[cart_button icon=""]' );
+        
+        $this->assertNotContains( $expected, $actual );   
+    }
 }
