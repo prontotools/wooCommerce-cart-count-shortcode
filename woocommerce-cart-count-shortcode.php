@@ -19,6 +19,13 @@ function woocommerce_cart_count_shortcode( $atts ) {
     );
 
     $atts = shortcode_atts( $defaults, $atts );
+
+    $icon_html = "";
+    if ( $atts["icon"] == "cart" ) {
+    	$icon_html = '<i class="fa fa-shopping-cart"></i>';
+    }
+
+    return $icon_html;
 }
 
-add_shortcode( "woocommerce_cart_count", "woocommerce_cart_count_shortcode" );
+add_shortcode( "cart_button", "woocommerce_cart_count_shortcode" );

@@ -15,11 +15,19 @@ class WooCommerce_Cart_Count_Shortcode_Test extends WP_UnitTestCase {
     	global $shortcode_tags;
 
     	$this->assertTrue( array_key_exists(
-    		"woocommerce_cart_count",
+    		"cart_button",
     		$shortcode_tags
     	) );
 
     	$expected = "woocommerce_cart_count_shortcode";
-    	$this->assertEquals( $expected, $shortcode_tags["woocommerce_cart_count"]);
+    	$this->assertEquals( $expected, $shortcode_tags["cart_button"]);
+    }
+
+    public function test_put_cart_icon_should_render_icon_html_correctly() {
+    	$expected = '<i class="fa fa-shopping-cart"></i>';
+
+    	$actual = do_shortcode( '[cart_button icon="cart"]' );
+    	
+    	$this->assertContains( $expected, $actual );
     }
 }
