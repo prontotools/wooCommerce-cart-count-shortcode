@@ -22,9 +22,9 @@ function woocommerce_cart_count_shortcode( $atts ) {
 
     $icon_html = "";
     if ( $atts["icon"] == "cart" ) {
-    	$icon_html = '<i class="fa fa-shopping-cart"></i>';
-    } elseif ( $atts["icon"] == "basket" ) {
-        $icon_html = '<i class="fa fa-shopping-basket"></i>';
+        $icon_html = '<i class="fa fa-shopping-cart"></i>';
+    } else {
+    	$icon_html = '<i class="fa fa-' . $atts["icon"] . '"></i>';
     }
 
     return $icon_html;
