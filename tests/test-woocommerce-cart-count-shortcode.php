@@ -2,6 +2,16 @@
 
 require_once( "woocommerce-cart-count-shortcode.php" );
 
+class WooCommerce {
+    public $cart;
+}
+
+class Fake_WC_Cart {
+    public function get_cart_contents_count() {
+        return 3;
+    }
+}
+
 class WooCommerce_Cart_Count_Shortcode_Test extends WP_UnitTestCase {
 	public function setUp() {
 		parent::setUp();
@@ -45,5 +55,18 @@ class WooCommerce_Cart_Count_Shortcode_Test extends WP_UnitTestCase {
         $actual = do_shortcode( '[cart_button icon=""]' );
         
         $this->assertNotContains( $expected, $actual );   
+    }
+
+    public function test_show_items_in_the_cart_if_set_show_items_as_true() {
+        global $woocommerce;
+
+        $woocommerce = new WooCommerce;
+        $woocommerce->cart = new Fake_WC_Cart;
+
+        $expected = ' (3)';
+
+        $actual = do_shortcode( '[cart_button show_items="true"]' );
+
+        $this->assertEquals( $expected, $actual );
     }
 }

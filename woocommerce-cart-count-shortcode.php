@@ -10,12 +10,12 @@
  */
 
 function woocommerce_cart_count_shortcode( $atts ) {
-	$defaults = array(
-        "icon"  			 => "",
-        "empty_cart_text" 	 => "",
+    $defaults = array(
+        "icon"               => "",
+        "empty_cart_text"    => "",
         "items_in_cart_text" => "",
         "show_items"         => "",
-        "custom_css" 		 => ""
+        "custom_css"         => ""
     );
 
     $atts = shortcode_atts( $defaults, $atts );
@@ -25,11 +25,21 @@ function woocommerce_cart_count_shortcode( $atts ) {
         if ( $atts["icon"] == "cart" ) {
             $icon_html = '<i class="fa fa-shopping-cart"></i>';
         } else {
-        	$icon_html = '<i class="fa fa-' . $atts["icon"] . '"></i>';
+            $icon_html = '<i class="fa fa-' . $atts["icon"] . '"></i>';
         }
     }
 
-    return $icon_html;
+    $cart_count = "";
+    if ( $atts["show_items"] == "true" ) {
+        if ( class_exists( "WooCommerce" ) ) {
+            global $woocommerce;
+            $cart_count = ' (' . $woocommerce->cart->get_cart_contents_count() . ')';
+        }
+    }
+
+    $html = $icon_html . $cart_count;
+    
+    return $html;
 }
 
 add_shortcode( "cart_button", "woocommerce_cart_count_shortcode" );
