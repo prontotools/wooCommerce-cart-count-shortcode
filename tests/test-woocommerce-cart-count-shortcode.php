@@ -69,4 +69,17 @@ class WooCommerce_Cart_Count_Shortcode_Test extends WP_UnitTestCase {
 
         $this->assertEquals( $expected, $actual );
     }
+
+    public function test_not_show_items_in_the_cart_if_set_show_items_as_false() {
+        global $woocommerce;
+
+        $woocommerce = new WooCommerce;
+        $woocommerce->cart = new Fake_WC_Cart;
+
+        $expected = ' (3)';
+
+        $actual = do_shortcode( '[cart_button show_items="false"]' );
+
+        $this->assertNotEquals( $expected, $actual );
+    }
 }
