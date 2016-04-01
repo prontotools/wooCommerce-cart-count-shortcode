@@ -37,8 +37,15 @@ function woocommerce_cart_count_shortcode( $atts ) {
         }
     }
 
-    $html = $icon_html . $cart_count;
-    
+    $cart_text_html = "";
+    if ( $cart_count != "" ) {
+        if ( $atts["items_in_cart_text"] != NULL ) {
+            $cart_text_html = ' ' . $atts["items_in_cart_text"];
+        }
+    }
+
+    $html = $icon_html . $cart_text_html . $cart_count;
+
     return $html;
 }
 

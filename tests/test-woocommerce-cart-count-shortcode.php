@@ -67,7 +67,7 @@ class WooCommerce_Cart_Count_Shortcode_Test extends WP_UnitTestCase {
 
         $actual = do_shortcode( '[cart_button show_items="true"]' );
 
-        $this->assertEquals( $expected, $actual );
+        $this->assertContains( $expected, $actual );
     }
 
     public function test_not_show_items_in_the_cart_if_set_show_items_as_false() {
@@ -80,6 +80,19 @@ class WooCommerce_Cart_Count_Shortcode_Test extends WP_UnitTestCase {
 
         $actual = do_shortcode( '[cart_button show_items="false"]' );
 
-        $this->assertNotEquals( $expected, $actual );
+        $this->assertNotContains( $expected, $actual );
+    }
+
+    public function test_show_cart_if_has_item_in_cart_and_set_items_in_cart_text() {
+        global $woocommerce;
+
+        $woocommerce = new WooCommerce;
+        $woocommerce->cart = new Fake_WC_Cart;
+
+        $expected = 'Cart (3)';
+
+        $actual = do_shortcode( '[cart_button show_items="true" items_in_cart_text="Cart"]' );
+
+        $this->assertContains( $expected, $actual );
     }
 }
