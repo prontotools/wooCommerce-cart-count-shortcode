@@ -24,8 +24,6 @@ class WooCommerce_Cart_Count_Shortcode_Test extends WP_UnitTestCase {
 
         $woocommerce = new WooCommerce;
         $woocommerce->cart = new Fake_WC_Cart;
-		
-        parent::setUp();
 	}
 
 	public function tearDown() {
