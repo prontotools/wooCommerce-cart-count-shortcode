@@ -30,21 +30,24 @@ function woocommerce_cart_count_shortcode( $atts ) {
     }
 
     $cart_count = "";
+    if ( class_exists( "WooCommerce" ) ) {
+        global $woocommerce;
+        $cart_count = $woocommerce->cart->get_cart_contents_count();
+    }
+
+    $cart_count_html = "";
     if ( $atts["show_items"] == "true" ) {
-        if ( class_exists( "WooCommerce" ) ) {
-            global $woocommerce;
-            $cart_count = ' (' . $woocommerce->cart->get_cart_contents_count() . ')';
-        }
+        $cart_count_html = " (" . $cart_count . ")";
     }
 
     $cart_text_html = "";
-    if ( $cart_count != "" ) {
-        if ( $atts["items_in_cart_text"] != NULL ) {
+    if ( $cart_count > 0 ) {
+        if ( $atts["items_in_cart_text"] != "" ) {
             $cart_text_html = ' ' . $atts["items_in_cart_text"];
         }
     }
 
-    $html = $icon_html . $cart_text_html . $cart_count;
+    $html = $icon_html . $cart_text_html . $cart_count_html;
 
     return $html;
 }

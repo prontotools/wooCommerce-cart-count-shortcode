@@ -12,6 +12,12 @@ class Fake_WC_Cart {
     }
 }
 
+class Fake_WC_Strore {
+    public function get_cart_contents_count() {
+        return 0;
+    }
+}
+
 class WooCommerce_Cart_Count_Shortcode_Test extends WP_UnitTestCase {
 	public function setUp() {
 		parent::setUp();
@@ -34,6 +40,11 @@ class WooCommerce_Cart_Count_Shortcode_Test extends WP_UnitTestCase {
     }
 
     public function test_put_cart_icon_should_render_cart_icon_html_correctly() {
+        global $woocommerce;
+
+        $woocommerce = new WooCommerce;
+        $woocommerce->cart = new Fake_WC_Cart;
+        
         $expected = '<i class="fa fa-shopping-cart"></i>';
 
         $actual = do_shortcode( '[cart_button icon="cart"]' );
@@ -42,7 +53,12 @@ class WooCommerce_Cart_Count_Shortcode_Test extends WP_UnitTestCase {
     }
 
     public function test_put_any_icon_should_render_any_icon_html_correctly() {
-    	$expected = '<i class="fa fa-truck"></i>';
+        global $woocommerce;
+
+        $woocommerce = new WooCommerce;
+        $woocommerce->cart = new Fake_WC_Cart;
+    	
+        $expected = '<i class="fa fa-truck"></i>';
 
     	$actual = do_shortcode( '[cart_button icon="truck"]' );
     	
@@ -50,6 +66,11 @@ class WooCommerce_Cart_Count_Shortcode_Test extends WP_UnitTestCase {
     }
 
     public function test_if_no_put_icon_should_not_render_icon_html() {
+        global $woocommerce;
+
+        $woocommerce = new WooCommerce;
+        $woocommerce->cart = new Fake_WC_Cart;
+        
         $expected = '<i class="fa fa-"></i>';
 
         $actual = do_shortcode( '[cart_button icon=""]' );
@@ -62,8 +83,8 @@ class WooCommerce_Cart_Count_Shortcode_Test extends WP_UnitTestCase {
 
         $woocommerce = new WooCommerce;
         $woocommerce->cart = new Fake_WC_Cart;
-
-        $expected = ' (3)';
+        
+        $expected = '(3)';
 
         $actual = do_shortcode( '[cart_button show_items="true"]' );
 
@@ -75,8 +96,8 @@ class WooCommerce_Cart_Count_Shortcode_Test extends WP_UnitTestCase {
 
         $woocommerce = new WooCommerce;
         $woocommerce->cart = new Fake_WC_Cart;
-
-        $expected = ' (3)';
+        
+        $expected = '(3)';
 
         $actual = do_shortcode( '[cart_button show_items="false"]' );
 
@@ -94,5 +115,17 @@ class WooCommerce_Cart_Count_Shortcode_Test extends WP_UnitTestCase {
         $actual = do_shortcode( '[cart_button show_items="true" items_in_cart_text="Cart"]' );
 
         $this->assertContains( $expected, $actual );
+    }
+
+    public function test_should_not_show_cart_text_if_no_item_in_cart() {
+        global $woocommerce;
+
+        $woocommerce = new WooCommerce;
+        $woocommerce->cart = new Fake_WC_Strore;
+
+        $expected = 'Cart';
+
+        $actual = do_shortcode( '[cart_button show_items="true" items_in_cart_text="Cart"]' );
+        $this->assertNotContains( $expected, $actual );
     }
 }
