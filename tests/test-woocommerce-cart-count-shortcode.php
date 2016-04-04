@@ -12,7 +12,7 @@ class Fake_WC_Cart {
     }
 }
 
-class Fake_WC_Strore {
+class Fake_WC_Store {
     public function get_cart_contents_count() {
         return 0;
     }
@@ -121,11 +121,23 @@ class WooCommerce_Cart_Count_Shortcode_Test extends WP_UnitTestCase {
         global $woocommerce;
 
         $woocommerce = new WooCommerce;
-        $woocommerce->cart = new Fake_WC_Strore;
+        $woocommerce->cart = new Fake_WC_Store;
 
         $expected = 'Cart';
 
         $actual = do_shortcode( '[cart_button show_items="true" items_in_cart_text="Cart"]' );
         $this->assertNotContains( $expected, $actual );
     }
+
+    public function test_put_empty_cart_text_as_store_should_show_text_if_no_product_in_cart() {
+        global $woocommerce;
+
+        $woocommerce = new WooCommerce;
+        $woocommerce->cart = new Fake_WC_Store;
+
+        $expected = 'Store';
+
+        $actual = do_shortcode( '[cart_button show_items="true" empty_cart_text="Store"]' );
+        $this->assertContains( $expected, $actual );
+    }   
 }

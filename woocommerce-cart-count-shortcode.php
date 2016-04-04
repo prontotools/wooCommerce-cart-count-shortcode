@@ -45,6 +45,10 @@ function woocommerce_cart_count_shortcode( $atts ) {
         if ( $atts["items_in_cart_text"] != "" ) {
             $cart_text_html = ' ' . $atts["items_in_cart_text"];
         }
+    } else {
+        if ( $atts["empty_cart_text"] != "" ) {
+            $cart_text_html = ' ' . $atts["empty_cart_text"];
+        }
     }
 
     $html = $icon_html . $cart_text_html . $cart_count_html;
