@@ -20,7 +20,12 @@ class Fake_WC_Store {
 
 class WooCommerce_Cart_Count_Shortcode_Test extends WP_UnitTestCase {
 	public function setUp() {
-		parent::setUp();
+        global $woocommerce;
+
+        $woocommerce = new WooCommerce;
+        $woocommerce->cart = new Fake_WC_Cart;
+		
+        parent::setUp();
 	}
 
 	public function tearDown() {
@@ -79,11 +84,6 @@ class WooCommerce_Cart_Count_Shortcode_Test extends WP_UnitTestCase {
     }
 
     public function test_show_items_in_the_cart_if_set_show_items_as_true() {
-        global $woocommerce;
-
-        $woocommerce = new WooCommerce;
-        $woocommerce->cart = new Fake_WC_Cart;
-        
         $expected = '(3)';
 
         $actual = do_shortcode( '[cart_button show_items="true"]' );
@@ -92,11 +92,6 @@ class WooCommerce_Cart_Count_Shortcode_Test extends WP_UnitTestCase {
     }
 
     public function test_not_show_items_in_the_cart_if_set_show_items_as_false() {
-        global $woocommerce;
-
-        $woocommerce = new WooCommerce;
-        $woocommerce->cart = new Fake_WC_Cart;
-        
         $expected = '(3)';
 
         $actual = do_shortcode( '[cart_button show_items="false"]' );
@@ -105,11 +100,6 @@ class WooCommerce_Cart_Count_Shortcode_Test extends WP_UnitTestCase {
     }
 
     public function test_show_cart_if_has_item_in_cart_and_set_items_in_cart_text() {
-        global $woocommerce;
-
-        $woocommerce = new WooCommerce;
-        $woocommerce->cart = new Fake_WC_Cart;
-
         $expected = 'Cart (3)';
 
         $actual = do_shortcode( '[cart_button show_items="true" items_in_cart_text="Cart"]' );
@@ -138,6 +128,13 @@ class WooCommerce_Cart_Count_Shortcode_Test extends WP_UnitTestCase {
         $expected = 'Store';
 
         $actual = do_shortcode( '[cart_button show_items="true" empty_cart_text="Store"]' );
+        $this->assertContains( $expected, $actual );
+    }
+
+    public function test_put_custom_class_should_render_html_correctly() {
+        $expected = '<a class="custom">Cart</a>';
+
+        $actual = do_shortcode( '[cart_button items_in_cart_text="Cart" custom_css="custom"]' );
         $this->assertContains( $expected, $actual );
     }   
 }

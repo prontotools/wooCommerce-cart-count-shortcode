@@ -23,9 +23,9 @@ function woocommerce_cart_count_shortcode( $atts ) {
     $icon_html = "";
     if ( $atts["icon"] ) {
         if ( $atts["icon"] == "cart" ) {
-            $icon_html = '<i class="fa fa-shopping-cart"></i>';
+            $icon_html = '<i class="fa fa-shopping-cart"></i> ';
         } else {
-            $icon_html = '<i class="fa fa-' . $atts["icon"] . '"></i>';
+            $icon_html = '<i class="fa fa-' . $atts["icon"] . '"></i> ';
         }
     }
 
@@ -43,15 +43,21 @@ function woocommerce_cart_count_shortcode( $atts ) {
     $cart_text_html = "";
     if ( $cart_count > 0 ) {
         if ( $atts["items_in_cart_text"] != "" ) {
-            $cart_text_html = ' ' . $atts["items_in_cart_text"];
+            $cart_text_html = $atts["items_in_cart_text"];
         }
     } else {
         if ( $atts["empty_cart_text"] != "" ) {
-            $cart_text_html = ' ' . $atts["empty_cart_text"];
+            $cart_text_html = $atts["empty_cart_text"];
         }
     }
 
-    $html = $icon_html . $cart_text_html . $cart_count_html;
+    $custom_css = "";
+    if ( $atts["custom_css"] ) {
+        $custom_css = ' class="' . $atts["custom_css"] . '"';
+    }
+
+    $html = "<a" . $custom_css . ">" . $icon_html . $cart_text_html . $cart_count_html;
+    $html .= "</a>";
 
     return $html;
 }
