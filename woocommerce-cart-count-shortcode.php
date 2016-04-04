@@ -41,14 +41,17 @@ function woocommerce_cart_count_shortcode( $atts ) {
     }
 
     $cart_text_html = "";
+    $link_to_page = "";
     if ( $cart_count > 0 ) {
         if ( $atts["items_in_cart_text"] != "" ) {
             $cart_text_html = $atts["items_in_cart_text"];
         }
+        $link_to_page = ' href="/cart/"';
     } else {
         if ( $atts["empty_cart_text"] != "" ) {
             $cart_text_html = $atts["empty_cart_text"];
         }
+        $link_to_page = ' href="/shop/"';
     }
 
     $custom_css = "";
@@ -56,7 +59,8 @@ function woocommerce_cart_count_shortcode( $atts ) {
         $custom_css = ' class="' . $atts["custom_css"] . '"';
     }
 
-    $html = "<a" . $custom_css . ">" . $icon_html . $cart_text_html . $cart_count_html;
+    $html  = "<a" . $link_to_page . $custom_css . ">";
+    $html .= $icon_html . $cart_text_html . $cart_count_html;
     $html .= "</a>";
 
     return $html;

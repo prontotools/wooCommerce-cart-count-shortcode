@@ -132,9 +132,30 @@ class WooCommerce_Cart_Count_Shortcode_Test extends WP_UnitTestCase {
     }
 
     public function test_put_custom_class_should_render_html_correctly() {
-        $expected = '<a class="custom">Cart</a>';
+        $expected = '<a href="/cart/" class="custom">Cart</a>';
 
         $actual = do_shortcode( '[cart_button items_in_cart_text="Cart" custom_css="custom"]' );
         $this->assertContains( $expected, $actual );
-    }   
+    }
+
+    public function test_show_link_to_shop_if_has_no_product_in_cart() {
+        global $woocommerce;
+
+        $woocommerce = new WooCommerce;
+        $woocommerce->cart = new Fake_WC_Store;
+
+        $expected = '<a href="/shop/">Store</a>';
+
+        $actual = do_shortcode( '[cart_button empty_cart_text="Store"]' );
+
+        $this->assertContains( $expected, $actual );
+    }
+
+    public function test_show_link_to_cart_if_has_product_in_cart() {
+        $expected = '<a href="/cart/">Cart</a>';
+
+        $actual = do_shortcode( '[cart_button items_in_cart_text="Cart"]' );
+
+        $this->assertContains( $expected, $actual );
+    }
 }
