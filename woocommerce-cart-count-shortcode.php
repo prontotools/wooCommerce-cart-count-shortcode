@@ -11,7 +11,7 @@
 
 function woocommerce_cart_count_shortcode( $atts ) {
     $defaults = array(
-        "icon"               => "",
+        "icon"               => "cart",
         "empty_cart_text"    => "",
         "items_in_cart_text" => "",
         "show_items"         => "",

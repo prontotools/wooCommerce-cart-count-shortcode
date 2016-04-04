@@ -42,25 +42,15 @@ class WooCommerce_Cart_Count_Shortcode_Test extends WP_UnitTestCase {
     	$this->assertEquals( $expected, $shortcode_tags["cart_button"]);
     }
 
-    public function test_put_cart_icon_should_render_cart_icon_html_correctly() {
-        global $woocommerce;
-
-        $woocommerce = new WooCommerce;
-        $woocommerce->cart = new Fake_WC_Cart;
-        
+    public function test_cart_icon_should_render_cart_icon_html_as_default_correctly() {
         $expected = '<i class="fa fa-shopping-cart"></i>';
 
-        $actual = do_shortcode( '[cart_button icon="cart"]' );
+        $actual = do_shortcode( '[cart_button]' );
         
         $this->assertContains( $expected, $actual );
     }
 
     public function test_put_any_icon_should_render_any_icon_html_correctly() {
-        global $woocommerce;
-
-        $woocommerce = new WooCommerce;
-        $woocommerce->cart = new Fake_WC_Cart;
-    	
         $expected = '<i class="fa fa-truck"></i>';
 
     	$actual = do_shortcode( '[cart_button icon="truck"]' );
@@ -69,11 +59,6 @@ class WooCommerce_Cart_Count_Shortcode_Test extends WP_UnitTestCase {
     }
 
     public function test_if_no_put_icon_should_not_render_icon_html() {
-        global $woocommerce;
-
-        $woocommerce = new WooCommerce;
-        $woocommerce->cart = new Fake_WC_Cart;
-        
         $expected = '<i class="fa fa-"></i>';
 
         $actual = do_shortcode( '[cart_button icon=""]' );
@@ -130,7 +115,7 @@ class WooCommerce_Cart_Count_Shortcode_Test extends WP_UnitTestCase {
     }
 
     public function test_put_custom_class_should_render_html_correctly() {
-        $expected = '<a href="/cart/" class="custom">Cart</a>';
+        $expected = '<a href="/cart/" class="custom"><i class="fa fa-shopping-cart"></i> Cart</a>';
 
         $actual = do_shortcode( '[cart_button items_in_cart_text="Cart" custom_css="custom"]' );
         $this->assertContains( $expected, $actual );
@@ -142,7 +127,7 @@ class WooCommerce_Cart_Count_Shortcode_Test extends WP_UnitTestCase {
         $woocommerce = new WooCommerce;
         $woocommerce->cart = new Fake_WC_Store;
 
-        $expected = '<a href="/shop/">Store</a>';
+        $expected = '<a href="/shop/"><i class="fa fa-shopping-cart"></i> Store</a>';
 
         $actual = do_shortcode( '[cart_button empty_cart_text="Store"]' );
 
@@ -150,7 +135,7 @@ class WooCommerce_Cart_Count_Shortcode_Test extends WP_UnitTestCase {
     }
 
     public function test_show_link_to_cart_if_has_product_in_cart() {
-        $expected = '<a href="/cart/">Cart</a>';
+        $expected = '<a href="/cart/"><i class="fa fa-shopping-cart"></i> Cart</a>';
 
         $actual = do_shortcode( '[cart_button items_in_cart_text="Cart"]' );
 
