@@ -10,6 +10,9 @@ class Fake_WC_Cart {
     public function get_cart_contents_count() {
         return 3;
     }
+    public function get_cart_url() {
+        return '/cart/';
+    }
 }
 
 class Fake_WC_Store {
@@ -24,6 +27,8 @@ class WooCommerce_Cart_Count_Shortcode_Test extends WP_UnitTestCase {
 
         $woocommerce = new WooCommerce;
         $woocommerce->cart = new Fake_WC_Cart;
+
+        // $shop_url = wc_get_page_permalink( 'shop' );
 	}
 
 	public function tearDown() {
