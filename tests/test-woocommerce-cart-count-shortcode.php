@@ -50,6 +50,14 @@ class WooCommerce_Cart_Count_Shortcode_Test extends WP_UnitTestCase {
         $this->assertContains( $expected, $actual );
     }
 
+    public function test_basket_icon_should_render_cart_icon_html_as_default_correctly() {
+        $expected = '<i class="fa fa-shopping-basket"></i>';
+
+        $actual = do_shortcode( '[cart_button icon="basket"]' );
+        
+        $this->assertContains( $expected, $actual );
+    }
+
     public function test_put_any_icon_should_render_any_icon_html_correctly() {
         $expected = '<i class="fa fa-truck"></i>';
 
