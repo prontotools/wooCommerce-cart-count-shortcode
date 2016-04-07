@@ -7,6 +7,15 @@ Display a link to your shopping cart with the item count anywhere on your site w
 
 Usage
 -----
+
+**Parameters:**
+* `icon`
+* `empty_cart_text`
+* `items_in_cart_text`
+* `show_items`
+* `custom_css`
+
+**Examples:**
 * `[cart_button]`
 * `[cart_button icon="basket"]`
 * `[cart_button show_items="true"]`
