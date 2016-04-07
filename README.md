@@ -23,3 +23,4 @@ Changelog
 
 = 1.0.0 =
 - First release!
+- Tested with WordPress 4.4.2 and WooCommerce 2.5.5.
