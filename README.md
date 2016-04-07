@@ -5,6 +5,15 @@ WooCommerce Cart Count Shortcode
 
 Display a link to your shopping cart with the item count anywhere on your site with a customizable shortcode.
 
+Usage
+-----
+* `[cart_button]`
+* `[cart_button icon="basket"]`
+* `[cart_button show_items="true"]`
+* `[cart_button show_items="true" items_in_cart_text="Cart"]`
+* `[cart_button show_items="true" empty_cart_text="Store"]`
+* `[cart_button items_in_cart_text="Cart" custom_css="custom"]`
+
 Developer Guide
 ---------------
 
