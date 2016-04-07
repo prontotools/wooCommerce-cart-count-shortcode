@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Plugin Name: WooCommerce Cart Count Shortcode
  * Plugin URI: https://github.com/prontotools/woocommerce-cart-count-shortcode
@@ -26,8 +25,7 @@ function woocommerce_cart_count_shortcode( $atts ) {
             $icon_html = '<i class="fa fa-shopping-cart"></i> ';
         } elseif ( $atts["icon"] == "basket" ) {
             $icon_html = '<i class="fa fa-shopping-basket"></i> ';
-        }
-        else {
+        } else {
             $icon_html = '<i class="fa fa-' . $atts["icon"] . '"></i> ';
         }
     }
@@ -35,6 +33,7 @@ function woocommerce_cart_count_shortcode( $atts ) {
     $cart_count = "";
     if ( class_exists( "WooCommerce" ) ) {
         global $woocommerce;
+
         $cart_count = $woocommerce->cart->get_cart_contents_count();
 
         $cart_count_html = "";
@@ -53,8 +52,7 @@ function woocommerce_cart_count_shortcode( $atts ) {
             if ( "" != $atts["empty_cart_text"] ) {
                 $cart_text_html = $atts["empty_cart_text"];
             }
-            // $link_to_page = ' href="' . wc_get_page_permalink( 'shop' ) . '"';
-            $link_to_page = ' href="/shop/"';
+            $link_to_page = ' href="' . wc_get_page_permalink( 'shop' ) . '"';
         }
     }
 
