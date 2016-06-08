@@ -1,5 +1,5 @@
 === WooCommerce Cart Count Shortcode ===
-Contributors: prontotools
+Contributors: prontotools, sandsine
 Tags: woocommerce, cart, count, shortcode, shopping cart, item count, cart count, button, link
 Requires at least: 4.0
 Tested up to: 4.4.2
