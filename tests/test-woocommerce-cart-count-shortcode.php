@@ -13,6 +13,10 @@ class Fake_WC_Cart {
     public function get_cart_url() {
         return '/cart/';
     }
+
+    public function get_cart_total() {
+        return '$400';
+    }
 }
 
 class Fake_WC_Empty_Cart {
@@ -143,6 +147,13 @@ class WooCommerce_Cart_Count_Shortcode_Test extends WP_UnitTestCase {
     public function test_show_link_to_cart_if_has_product_in_cart() {
         $expected = "<a href=\"/cart/\"><i class=\"fa fa-shopping-cart\"></i> Cart</a>";
         $actual = do_shortcode( '[cart_button items_in_cart_text="Cart"]' );
+
+        $this->assertEquals( $expected, $actual );
+    }
+
+    public function test_show_total_price_to_cart_if_has_product_in_cart() {
+        $expected = "<a href=\"/cart/\"><i class=\"fa fa-shopping-cart\"></i> Cart (3) Total: $400</a>";
+        $actual = do_shortcode( '[cart_button show_items="true" show_total="true"]' );
 
         $this->assertEquals( $expected, $actual );
     }
