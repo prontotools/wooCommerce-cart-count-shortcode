@@ -16,6 +16,7 @@ function woocommerce_cart_count_shortcode( $atts ) {
         "empty_cart_text"    => "",
         "items_in_cart_text" => "",
         "show_items"         => "",
+        "show_total"         => "",
         "custom_css"         => ""
     );
 
@@ -37,10 +38,16 @@ function woocommerce_cart_count_shortcode( $atts ) {
         global $woocommerce;
 
         $cart_count = $woocommerce->cart->get_cart_contents_count();
+        $cart_total = $woocommerce->cart->get_cart_total();
 
         $cart_count_html = "";
         if ( "true" == $atts["show_items"] ) {
             $cart_count_html = " (" . $cart_count . ")";
+        }
+
+        $cart_total_html = "";
+        if ( "true" == $atts["show_total"] ) {
+            $cart_total_html = " Total: " . $cart_total;
         }
 
         $cart_text_html = "";
@@ -64,7 +71,7 @@ function woocommerce_cart_count_shortcode( $atts ) {
     }
 
     $html  = "<a" . $link_to_page . $custom_css . ">";
-    $html .= $icon_html . $cart_text_html . $cart_count_html;
+    $html .= $icon_html . $cart_text_html . $cart_count_html . $cart_total_html;
     $html .= "</a>";
 
     return $html;
