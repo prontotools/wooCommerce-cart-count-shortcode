@@ -23,6 +23,10 @@ class Fake_WC_Empty_Cart {
     public function get_cart_contents_count() {
         return 0;
     }
+
+    public function get_cart_total() {
+        return '$0';
+    }
 }
 
 function wc_get_page_permalink( $page ) {
