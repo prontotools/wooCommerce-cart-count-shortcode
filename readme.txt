@@ -20,12 +20,14 @@ Looking for a flexible way to display items in your site’s WooCommerce cart? L
 - **items_in_cart_text** - The text to display when there are one or more items in the cart. You may want this to default to “Cart”.
 - **show_items** - Enter “true/false” to show/hide items in the cart in parentheses. The item count will only show when there are one or more items in the cart.
 - **custom_css** - Any custom CSS you’d like to add to the link.
+- **show_total** - Enter “true/false” to show/hide total price in the cart
 
 **Examples:**
 
 - [cart_button]
 - [cart_button icon="basket"]
 - [cart_button show_items="true"]
+- [cart_button show_items="true" show_total="true"]
 - [cart_button show_items="false" items_in_cart_text="Cart"]
 - [cart_button show_items="true" empty_cart_text="Store"]
 - [cart_button items_in_cart_text="Cart" custom_css="custom"]
@@ -49,3 +51,5 @@ Looking for a flexible way to display items in your site’s WooCommerce cart? L
 * First release!
 * Tested with WordPress 4.4.2 and WooCommerce 2.5.5.
 
+= 1.0.1 =
+* Add parameter `show_total` to make this shortcode can show total price in cart
