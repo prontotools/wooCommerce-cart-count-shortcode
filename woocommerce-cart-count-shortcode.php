@@ -3,7 +3,7 @@
  * Plugin Name: WooCommerce Cart Count Shortcode
  * Plugin URI: https://github.com/prontotools/woocommerce-cart-count-shortcode
  * Description: Display a link to your shopping cart with the item count anywhere on your site with a customizable shortcode.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: Pronto Tools
  * Author URI: http://www.prontotools.io
  * License: GNU General Public License v3.0
