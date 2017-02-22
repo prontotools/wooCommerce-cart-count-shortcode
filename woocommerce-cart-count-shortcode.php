@@ -17,6 +17,7 @@ function woocommerce_cart_count_shortcode( $atts ) {
         "items_in_cart_text" => "",
         "show_items"         => "",
         "show_total"         => "",
+        "total_text"         => "",
         "custom_css"         => ""
     );
 
@@ -47,7 +48,12 @@ function woocommerce_cart_count_shortcode( $atts ) {
 
         $cart_total_html = "";
         if ( "true" == $atts["show_total"] ) {
-            $cart_total_html = " Total: " . $cart_total;
+            if ( $atts["total_text"] ) {
+                $cart_total_html = " " . $atts["total_text"] . " " . $cart_total;
+            }
+            else {
+                $cart_total_html = " Total: " . $cart_total;
+            }
         }
 
         $cart_text_html = "";

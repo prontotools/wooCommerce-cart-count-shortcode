@@ -3,7 +3,7 @@ Contributors: prontotools, sandsine
 Tags: woocommerce, cart, count, shortcode, shopping cart, item count, cart count, button, link
 Requires at least: 4.0
 Tested up to: 4.4.2
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -53,3 +53,6 @@ Looking for a flexible way to display items in your site’s WooCommerce cart? L
 
 = 1.0.1 =
 * Add parameter `show_total` to make this shortcode can show total price in cart
+
+= 1.0.2 =
+* Add parameter `total_text` to custom text for total price in cart

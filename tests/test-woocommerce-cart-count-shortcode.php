@@ -161,4 +161,11 @@ class WooCommerce_Cart_Count_Shortcode_Test extends WP_UnitTestCase {
 
         $this->assertEquals( $expected, $actual );
     }
+
+    public function test_show_total_price_with_custom_text_to_cart_if_has_product_in_cart() {
+        $expected = "<a href=\"/cart/\"><i class=\"fa fa-shopping-cart\"></i>  (3) Total Price: $400</a>";
+        $actual = do_shortcode( '[cart_button show_items="true" show_total="true" total_text="Total Price:"]' );
+
+        $this->assertEquals( $expected, $actual );
+    }
 }

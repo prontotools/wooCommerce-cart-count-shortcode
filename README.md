@@ -47,3 +47,6 @@ Changelog
 
 = 1.0.1 =
 - Add parameter `show_total` to make this shortcode can show total price in cart
+
+= 1.0.2 =
+- Add parameter `total_text` to custom text for total price in cart
