@@ -14,6 +14,7 @@ Usage
 * `items_in_cart_text`
 * `show_items`
 * `show_total`
+* `total_text`
 * `custom_css`
 
 **Examples:**
@@ -21,6 +22,7 @@ Usage
 * `[cart_button icon="basket"]`
 * `[cart_button show_items="true"]`
 * `[cart_button show_items="true" show_total="true"]`
+* `[cart_button show_items="true" show_total="true" total_text="Total Price:"]`
 * `[cart_button show_items="true" items_in_cart_text="Cart"]`
 * `[cart_button show_items="true" empty_cart_text="Store"]`
 * `[cart_button items_in_cart_text="Cart" custom_css="custom"]`

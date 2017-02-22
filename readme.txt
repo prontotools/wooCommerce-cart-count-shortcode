@@ -18,6 +18,7 @@ Looking for a flexible way to display items in your site’s WooCommerce cart? L
 - **icon** - Any [Font Awesome](https://fortawesome.github.io/Font-Awesome/) icon. Most of the time you’ll want to use `shopping-cart` or `shopping-basket`. 
 - **empty_cart_text** - The text to display when there are zero items in the cart. You may want this to default to “Shop”.
 - **items_in_cart_text** - The text to display when there are one or more items in the cart. You may want this to default to “Cart”.
+- **total_text** - The text to display when there are one or more items in the cart. You may want this to default to “Total:”.
 - **show_items** - Enter “true/false” to show/hide items in the cart in parentheses. The item count will only show when there are one or more items in the cart.
 - **custom_css** - Any custom CSS you’d like to add to the link.
 - **show_total** - Enter “true/false” to show/hide total price in the cart
@@ -28,6 +29,7 @@ Looking for a flexible way to display items in your site’s WooCommerce cart? L
 - [cart_button icon="basket"]
 - [cart_button show_items="true"]
 - [cart_button show_items="true" show_total="true"]
+- [cart_button show_items="true" show_total="true" total_text="Total Price:"]
 - [cart_button show_items="false" items_in_cart_text="Cart"]
 - [cart_button show_items="true" empty_cart_text="Store"]
 - [cart_button items_in_cart_text="Cart" custom_css="custom"]
