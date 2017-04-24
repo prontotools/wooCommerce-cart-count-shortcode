@@ -25,21 +25,21 @@ Looking for a flexible way to display items in your site’s WooCommerce cart? L
 
 **Examples:**
 
-- [cart_button]
-- [cart_button icon="basket"]
-- [cart_button show_items="true"]
-- [cart_button show_items="true" show_total="true"]
-- [cart_button show_items="true" show_total="true" total_text="Total Price:"]
-- [cart_button show_items="false" items_in_cart_text="Cart"]
-- [cart_button show_items="true" empty_cart_text="Store"]
-- [cart_button items_in_cart_text="Cart" custom_css="custom"]
+- `[cart_button]`
+- `[cart_button icon="basket"]`
+- `[cart_button show_items="true"]`
+- `[cart_button show_items="true" show_total="true"]`
+- `[cart_button show_items="true" show_total="true" total_text="Total Price:"]`
+- `[cart_button show_items="false" items_in_cart_text="Cart"]`
+- `[cart_button show_items="true" empty_cart_text="Store"]`
+- `[cart_button items_in_cart_text="Cart" custom_css="custom"]`
 
 
 == Installation ==
 
 1. Upload the plugin files to the `/wp-content/plugins/plugin-name` directory, or install the plugin through the WordPress plugins screen directly.
 1. Activate the plugin through the 'Plugins' screen in WordPress
-1. Include the shortcode anywhere on your website: `[cart_button icon="shopping-cart" empty_cart_text="Shop" items_in_cart_text="Cart" custom_css="custom"]'
+1. Include the shortcode anywhere on your website: `[cart_button icon="shopping-cart" empty_cart_text="Shop" items_in_cart_text="Cart" custom_css="custom"]`
 
 
 == Screenshots ==
