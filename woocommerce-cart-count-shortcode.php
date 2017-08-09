@@ -34,7 +34,7 @@ function woocommerce_cart_count_shortcode( $atts ) {
         }
     }
 
-    $cart_count_html = apply_filters( 'wccs_cart_icon_html', $icon_html, $atts["icon"] );
+    $icon_html = apply_filters( 'wccs_cart_icon_html', $icon_html, $atts["icon"] );
 
     $cart_count = "";
     if ( class_exists( "WooCommerce" ) ) {
