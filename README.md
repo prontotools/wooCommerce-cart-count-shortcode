@@ -48,7 +48,10 @@ Changelog
 - Tested with WordPress 4.4.2 and WooCommerce 2.5.5.
 
 = 1.0.1 =
-- Add parameter `show_total` to make this shortcode can show total price in cart
+- Add parameter `show_total` to make this shortcode can show total price in cart.
 
 = 1.0.2 =
-- Add parameter `total_text` to custom text for total price in cart
+- Add parameter `total_text` to custom text for total price in cart.
+
+= 1.0.3 =
+- Prevent fatal error when WooCommerce does not get initialized properly.

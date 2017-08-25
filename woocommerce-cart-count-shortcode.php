@@ -3,7 +3,7 @@
  * Plugin Name: WooCommerce Cart Count Shortcode
  * Plugin URI: https://github.com/prontotools/woocommerce-cart-count-shortcode
  * Description: Display a link to your shopping cart with the item count anywhere on your site with a customizable shortcode.
- * Version: 1.0.2
+ * Version: 1.0.3
  * Author: Pronto Tools
  * Author URI: http://www.prontotools.io
  * License: GNU General Public License v3.0
@@ -38,8 +38,17 @@ function woocommerce_cart_count_shortcode( $atts ) {
     if ( class_exists( "WooCommerce" ) ) {
         global $woocommerce;
 
-        $cart_count = $woocommerce->cart->get_cart_contents_count();
-        $cart_total = $woocommerce->cart->get_cart_total();
+        if ( NULL !== $woocommerce ) {
+            $cart_count = $woocommerce->cart->get_cart_contents_count();
+            $cart_total = $woocommerce->cart->get_cart_total();
+            $cart_url   = $woocommerce->cart->get_cart_url();
+            $shop_url   = wc_get_page_permalink( "shop" );
+        } else {
+            $cart_count = 0;
+            $cart_total = 0;
+            $cart_url   = "#";
+            $shop_url   = "#";
+        }
 
         $cart_count_html = "";
         if ( "true" == $atts["show_items"] ) {
@@ -62,12 +71,12 @@ function woocommerce_cart_count_shortcode( $atts ) {
             if ( "" != $atts["items_in_cart_text"] ) {
                 $cart_text_html = $atts["items_in_cart_text"];
             }
-            $link_to_page = ' href="' . $woocommerce->cart->get_cart_url() . '"';
+            $link_to_page = ' href="' . $cart_url . '"';
         } else {
             if ( "" != $atts["empty_cart_text"] ) {
                 $cart_text_html = $atts["empty_cart_text"];
             }
-            $link_to_page = ' href="' . wc_get_page_permalink( 'shop' ) . '"';
+            $link_to_page = ' href="' . $shop_url . '"';
         }
     }
 
