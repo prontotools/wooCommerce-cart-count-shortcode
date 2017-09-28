@@ -34,6 +34,8 @@ function woocommerce_cart_count_shortcode( $atts ) {
         }
     }
 
+    $icon_html = apply_filters( 'wccs_cart_icon_html', $icon_html, $atts["icon"] );
+
     $cart_count = "";
     if ( class_exists( "WooCommerce" ) ) {
         global $woocommerce;
@@ -55,6 +57,8 @@ function woocommerce_cart_count_shortcode( $atts ) {
             $cart_count_html = " (" . $cart_count . ")";
         }
 
+        $cart_count_html = apply_filters( 'wccs_cart_count_html', $cart_count_html, $cart_count );
+
         $cart_total_html = "";
         if ( "true" == $atts["show_total"] ) {
             if ( $atts["total_text"] ) {
@@ -64,6 +68,8 @@ function woocommerce_cart_count_shortcode( $atts ) {
                 $cart_total_html = " Total: " . $cart_total;
             }
         }
+
+        $cart_total_html = apply_filters( 'wccs_cart_total_html', $cart_total_html, $cart_total );
 
         $cart_text_html = "";
         $link_to_page = "";
@@ -78,6 +84,7 @@ function woocommerce_cart_count_shortcode( $atts ) {
             }
             $link_to_page = ' href="' . $shop_url . '"';
         }
+
     }
 
     $custom_css = "";
