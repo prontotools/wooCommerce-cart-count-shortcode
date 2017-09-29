@@ -33,17 +33,28 @@ class Fake_WC_Empty_Cart {
     }
 }
 
+function override_cart_object( $fake_wc_cart ) {
+    $fake_wc_cart = new Fake_WC_Empty_Cart;
+
+    return $fake_wc_cart;
+}
+
+function WC() {
+    $woocommerce  = new WooCommerce;
+    $fake_wc_cart = new Fake_WC_Cart;
+
+    $woocommerce->cart = apply_filters( 'fake_wc_cart', $fake_wc_cart );
+
+    return $woocommerce;
+}
+
 function wc_get_page_permalink( $page ) {
     return "/" . $page . "/";
 }
 
 class WooCommerce_Cart_Count_Shortcode_Test extends WP_UnitTestCase {
     public function setUp() {
-        global $woocommerce;
-
-        $woocommerce = new WooCommerce;
-        $woocommerce->cart = new Fake_WC_Cart;
-
+        remove_filter( 'fake_wc_cart', 'override_cart_object', 10 );
         $this->shop_url = wc_get_page_permalink( "shop" );
     }
 
@@ -114,8 +125,7 @@ class WooCommerce_Cart_Count_Shortcode_Test extends WP_UnitTestCase {
     }
 
     public function test_should_not_show_cart_text_if_no_item_in_cart() {
-        global $woocommerce;
-        $woocommerce->cart = new Fake_WC_Empty_Cart;
+        add_filter( 'fake_wc_cart', 'override_cart_object', 10 );
 
         $expected = '<a href="/cart/"><i class="fa fa-shopping-cart"></i> Cart (0)</a>';
         $actual = do_shortcode( '[cart_button show_items="true" items_in_cart_text="Cart"]' );
@@ -124,9 +134,7 @@ class WooCommerce_Cart_Count_Shortcode_Test extends WP_UnitTestCase {
     }
 
     public function test_put_empty_cart_text_as_store_should_show_text_if_no_product_in_cart() {
-        global $woocommerce;
-
-        $woocommerce->cart = new Fake_WC_Empty_Cart;
+        add_filter( 'fake_wc_cart', 'override_cart_object', 10 );
 
         $expected = '<a href="/shop/"><i class="fa fa-shopping-cart"></i> Store (0)</a>';
         $actual = do_shortcode( '[cart_button show_items="true" empty_cart_text="Store"]' );
@@ -142,9 +150,7 @@ class WooCommerce_Cart_Count_Shortcode_Test extends WP_UnitTestCase {
     }
 
     public function test_show_link_to_shop_if_has_no_product_in_cart() {
-        global $woocommerce;
-
-        $woocommerce->cart = new Fake_WC_Empty_Cart;
+        add_filter( 'fake_wc_cart', 'override_cart_object', 10 );
 
         $expected = '<a href="' . $this->shop_url . '"><i class="fa fa-shopping-cart"></i> Store</a>';
         $actual = do_shortcode( '[cart_button empty_cart_text="Store"]' );
@@ -168,17 +174,6 @@ class WooCommerce_Cart_Count_Shortcode_Test extends WP_UnitTestCase {
 
     public function test_show_total_price_with_custom_text_to_cart_if_has_product_in_cart() {
         $expected = '<a href="/cart/"><i class="fa fa-shopping-cart"></i>  (3) Total Price: $400</a>';
-        $actual = do_shortcode( '[cart_button show_items="true" show_total="true" total_text="Total Price:"]' );
-
-        $this->assertEquals( $expected, $actual );
-    }
-
-    public function test_null_woocommerce_still_render_html() {
-        global $woocommerce;
-
-        $woocommerce = NULL;
-
-        $expected = '<a href="#"><i class="fa fa-shopping-cart"></i>  (0) Total Price: 0</a>';
         $actual = do_shortcode( '[cart_button show_items="true" show_total="true" total_text="Total Price:"]' );
 
         $this->assertEquals( $expected, $actual );

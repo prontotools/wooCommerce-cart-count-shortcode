@@ -3,7 +3,7 @@
  * Plugin Name: WooCommerce Cart Count Shortcode
  * Plugin URI: https://github.com/prontotools/woocommerce-cart-count-shortcode
  * Description: Display a link to your shopping cart with the item count anywhere on your site with a customizable shortcode.
- * Version: 1.0.3
+ * Version: 1.0.4
  * Author: Pronto Tools
  * Author URI: http://www.prontotools.io
  * License: GNU General Public License v3.0
@@ -33,30 +33,19 @@ function woocommerce_cart_count_shortcode( $atts ) {
             $icon_html = '<i class="fa fa-' . $atts["icon"] . '"></i> ';
         }
     }
-
     $icon_html = apply_filters( 'wccs_cart_icon_html', $icon_html, $atts["icon"] );
 
     $cart_count = "";
     if ( class_exists( "WooCommerce" ) ) {
-        global $woocommerce;
-
-        if ( NULL !== $woocommerce ) {
-            $cart_count = $woocommerce->cart->get_cart_contents_count();
-            $cart_total = $woocommerce->cart->get_cart_total();
-            $cart_url   = $woocommerce->cart->get_cart_url();
-            $shop_url   = wc_get_page_permalink( "shop" );
-        } else {
-            $cart_count = 0;
-            $cart_total = 0;
-            $cart_url   = "#";
-            $shop_url   = "#";
-        }
+        $cart_count = WC()->cart->get_cart_contents_count();
+        $cart_total = WC()->cart->get_cart_total();
+        $cart_url   = WC()->cart->get_cart_url();
+        $shop_url   = wc_get_page_permalink( "shop" );
 
         $cart_count_html = "";
         if ( "true" == $atts["show_items"] ) {
             $cart_count_html = " (" . $cart_count . ")";
         }
-
         $cart_count_html = apply_filters( 'wccs_cart_count_html', $cart_count_html, $cart_count );
 
         $cart_total_html = "";
@@ -68,7 +57,6 @@ function woocommerce_cart_count_shortcode( $atts ) {
                 $cart_total_html = " Total: " . $cart_total;
             }
         }
-
         $cart_total_html = apply_filters( 'wccs_cart_total_html', $cart_total_html, $cart_total );
 
         $cart_text_html = "";
@@ -84,7 +72,6 @@ function woocommerce_cart_count_shortcode( $atts ) {
             }
             $link_to_page = ' href="' . $shop_url . '"';
         }
-
     }
 
     $custom_css = "";

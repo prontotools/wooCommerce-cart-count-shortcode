@@ -55,3 +55,10 @@ Changelog
 
 = 1.0.3 =
 - Prevent fatal error when WooCommerce does not get initialized properly.
+
+= 1.0.4 =
+- Use `WC()` instead of the global variable `$woocommerce`.
+- Add 3 filters below to allow users to modify the generated markup.
+  1. `wccs_cart_icon_html`
+  2. `wccs_cart_count_html`
+  3. `wccs_cart_total_html`

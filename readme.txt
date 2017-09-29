@@ -2,8 +2,8 @@
 Contributors: prontotools, sandsine, zkancs
 Tags: woocommerce, cart, count, shortcode, shopping cart, item count, cart count, button, link
 Requires at least: 4.0
-Tested up to: 4.8.1
-Stable tag: 1.0.3
+Tested up to: 4.8.2
+Stable tag: 1.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -61,3 +61,10 @@ Looking for a flexible way to display items in your site’s WooCommerce cart? L
 
 = 1.0.3 =
 * Prevent fatal error when WooCommerce does not get initialized properly.
+
+= 1.0.4 =
+* Use `WC()` instead of the global variable `$woocommerce`.
+* Add 3 filters below to allow users to modify the generated markup.
+  1. `wccs_cart_icon_html`
+  2. `wccs_cart_count_html`
+  3. `wccs_cart_total_html`
