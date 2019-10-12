@@ -39,7 +39,7 @@ function woocommerce_cart_count_shortcode( $atts ) {
     if ( class_exists( "WooCommerce" ) ) {
         $cart_count = WC()->cart->get_cart_contents_count();
         $cart_total = WC()->cart->get_cart_total();
-        $cart_url   = WC()->cart->get_cart_url();
+        $cart_url   = wc_get_cart_url();
         $shop_url   = wc_get_page_permalink( "shop" );
 
         $cart_count_html = "";
